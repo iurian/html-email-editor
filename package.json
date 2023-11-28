@@ -1,0 +1,28 @@
+{
+  "name": "react-email-editor",
+  "version": "1.7.9",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-app-polyfill": "^1.0.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "react-router-dom": "^6.8.0",
+    "styled-components": "^5.3.6",
+    "unlayer-types": "latest"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
+    "@types/styled-components": "^5.1.32",
+    "@vitejs/plugin-react": "3.1.0",
+    "typescript": "^5.3.2",
+    "vite": "^3.0.2"
+  }
+}

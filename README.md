@@ -1,1 +1,1 @@
-# html-email-editor
+# HTML Editor for SellyAgent
