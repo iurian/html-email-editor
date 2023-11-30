@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,11 @@ import EmailEditor, {
   EditorRef,
   EmailEditorProps,
 } from '../../components/EmailEditor';
+import { useUpdateTemplate } from '../hooks/useUpdateTemplate';
+import axios from 'axios';
+import { EMAIL_TEMPLATE_KEY } from '../../constants/azure-function-keys';
+import { API_BASE_URL } from '../../constants/api';
+import toast from 'react-hot-toast';
 
 const Container = styled.div`
   display: flex;
@@ -64,25 +69,33 @@ const Bar = styled.div`
   }
 `;
 
-const DesignEdit = (params: { template: any }) => {
-  const { template } = params;
+const DesignEdit = (params: { template: any; templateId?: string }) => {
+  const { template, templateId = 'c1be5fb2-98fd-48d6-9492-d7904ca0cd4d' } =
+    params;
   const emailEditorRef = useRef<EditorRef | null>(null);
 
-  const saveDesign = () => {
+  const saveDesign = async () => {
     const unlayer = emailEditorRef.current?.editor;
-
-    unlayer?.saveDesign((design: any) => {
-      console.log('saveDesign', design);
-      alert('Design JSON has been logged in your developer console.');
-    });
+    if (unlayer) {
+      unlayer.saveDesign(async (design: any) => {
+        console.log('saveDesign', design);
+        try {
+          const response = await axios.put(
+            `${API_BASE_URL}/upload-email-template?code=${EMAIL_TEMPLATE_KEY}&id=${templateId}`,
+            design
+          );
+          toast.success('Template has been successfully saved.');
+        } catch (error) {
+          console.error('Error saving design to API', error);
+        }
+      });
+    }
   };
 
   const exportHtml = () => {
     const unlayer = emailEditorRef.current?.editor;
-
     unlayer?.exportHtml((data) => {
       const { html } = data;
-      //console.log('exportHtml', html);
       alert('Output HTML has been logged in your developer console.');
     });
   };

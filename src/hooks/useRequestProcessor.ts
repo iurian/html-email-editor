@@ -9,26 +9,26 @@ import {
 export function useRequestProcessor() {
   const queryClient = useQueryClient();
 
-  function query(key: string, queryFunction: QueryFunction, options = {}) {
+  const query = (key: string, queryFunction: QueryFunction, options = {}) => {
     return useQuery({
       queryKey: key,
       queryFn: queryFunction,
       ...options,
     });
-  }
+  };
 
-  function mutate(
+  const mutate = (
     key: string,
     mutationFunction: MutationFunction,
     options = {}
-  ) {
+  ) => {
     return useMutation({
       mutationKey: key,
       mutationFn: mutationFunction,
       onSettled: () => queryClient.invalidateQueries(key),
       ...options,
     });
-  }
+  };
 
   return { query, mutate };
 }

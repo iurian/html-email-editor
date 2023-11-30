@@ -1,5 +1,3 @@
-const queryClient = new QueryClient();
-
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -13,6 +11,10 @@ import {
 
 import Dashboard from './dashboard';
 import { QueryClient, QueryClientProvider } from 'react-query';
+
+import { Toaster } from 'react-hot-toast';
+
+const queryClient = new QueryClient();
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -31,6 +33,7 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
+        <Toaster />
         <GlobalStyle />
         <Routes>
           {/* <Route path="/" element={<Example />} /> */}
