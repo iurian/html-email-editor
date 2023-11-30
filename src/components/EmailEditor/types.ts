@@ -1,4 +1,4 @@
-/// <reference path="../../node_modules/unlayer-types/embed.d.ts" />
+/// <reference path="../../../node_modules/unlayer-types/embed.d.ts" />
 
 import { CSSProperties } from 'react';
 

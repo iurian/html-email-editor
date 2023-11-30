@@ -5,7 +5,7 @@ import React, {
   useMemo,
 } from 'react';
 
-import pkg from '../../package.json';
+import pkg from '../../../package.json';
 import { Editor, EditorRef, EmailEditorProps } from './types';
 import { loadScript } from './loadScript';
 

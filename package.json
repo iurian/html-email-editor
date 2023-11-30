@@ -9,15 +9,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.6.2",
     "react": "^18.2.0",
     "react-app-polyfill": "^1.0.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.8.0",
     "styled-components": "^5.3.6",
     "unlayer-types": "latest"
   },
   "devDependencies": {
+    "@types/node": "^20.10.1",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "@types/styled-components": "^5.1.32",

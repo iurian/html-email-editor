@@ -1,16 +1,4 @@
-// import React, { useRef } from 'react';
-// import './App.css';
-//import { createGlobalStyle } from 'styled-components';
-
-// function App() {
-//   return (
-//     <div className="App" style={{ textAlign: 'center' }}>
-//       udpated app goes here
-//     </div>
-//   );
-// }
-
-// export default App;
+const queryClient = new QueryClient();
 
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
@@ -24,6 +12,7 @@ import {
 } from 'react-router-dom';
 
 import Dashboard from './dashboard';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const GlobalStyle = createGlobalStyle`
   html, body {
@@ -40,14 +29,16 @@ const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <Router>
-      <GlobalStyle />
-      <Routes>
-        {/* <Route path="/" element={<Example />} /> */}
-        <Route path="/" element={<Navigate to="/dashboard" />} />
-        <Route path="/dashboard/*" element={<Dashboard />} />
-      </Routes>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <GlobalStyle />
+        <Routes>
+          {/* <Route path="/" element={<Example />} /> */}
+          <Route path="/" element={<Navigate to="/dashboard" />} />
+          <Route path="/dashboard/*" element={<Dashboard />} />
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
 };
 

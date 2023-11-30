@@ -1,10 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import EmailEditor, { EditorRef, EmailEditorProps } from '../email-editor'; // use react-email-editor instead
-
-import template from './template-47.json';
+import { JSONTemplate } from 'state/types/index';
+import EmailEditor, {
+  EditorRef,
+  EmailEditorProps,
+} from '../../components/EmailEditor';
 
 const Container = styled.div`
   display: flex;
@@ -62,13 +64,14 @@ const Bar = styled.div`
   }
 `;
 
-const DesignEdit = () => {
+const DesignEdit = (params: { template: any }) => {
+  const { template } = params;
   const emailEditorRef = useRef<EditorRef | null>(null);
 
   const saveDesign = () => {
     const unlayer = emailEditorRef.current?.editor;
 
-    unlayer?.saveDesign((design) => {
+    unlayer?.saveDesign((design: any) => {
       console.log('saveDesign', design);
       alert('Design JSON has been logged in your developer console.');
     });
@@ -79,23 +82,23 @@ const DesignEdit = () => {
 
     unlayer?.exportHtml((data) => {
       const { html } = data;
-      console.log('exportHtml', html);
+      //console.log('exportHtml', html);
       alert('Output HTML has been logged in your developer console.');
     });
   };
 
-  const onDesignLoad = (data) => {
+  const onDesignLoad = (data: any) => {
     console.log('onDesignLoad', data);
   };
 
   const onLoad: EmailEditorProps['onLoad'] = (unlayer) => {
-    console.log('onLoad', unlayer);
+    //console.log('onLoad', unlayer);
     //unlayer.addEventListener('design:loaded', onDesignLoad);
-    unlayer.loadDesign(template);
+    unlayer.loadDesign(template as JSONTemplate);
   };
 
   const onReady: EmailEditorProps['onReady'] = (unlayer) => {
-    console.log('onReady', unlayer);
+    //console.log('onReady', unlayer);
   };
 
   return (
@@ -112,7 +115,6 @@ const DesignEdit = () => {
         </button>
       </Bar>
 
-      {/* <EmailEditor ref={emailEditorRef} /> */}
       <EmailEditor ref={emailEditorRef} onLoad={onLoad} onReady={onReady} />
     </Container>
   );
